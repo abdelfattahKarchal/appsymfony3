@@ -1,5 +1,20 @@
-{% extends "base.html.twig" %}
+{% extends "back.html.twig" %}
 
 {% block body %}
     <h1>page pour admin</h1>
+    <p>{{ app.user.id }}</p>
+    <p>{{ app.user.email }}</p>
+    <ul>
+        {% for role in app.user.roles %}
+            <li> {{ role }} </li>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"> <a href="">Tableau de bord</a> </li>
+        <li class=" breadcrumb-item active"> Liste des categories </li>
+    </ol>
 {% endblock %}
