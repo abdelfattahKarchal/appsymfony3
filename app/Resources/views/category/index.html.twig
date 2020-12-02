@@ -1,17 +1,24 @@
 {% extends 'back.html.twig' %}
 
-{% block body %}
-    <h1>Categories list</h1>
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"> <a href="">Tableau de bord</a> </li>
+        <li class=" breadcrumb-item active"> Liste des categories </li>
+    </ol>
+{% endblock %}
 
-    <table>
+{% block body %}
+    <h3>Liste des categories</h3>
+    <div class="pull-right">
+        <a class="btn btn-success" href="{{ path('admin_category_new') }}"> <i class="fa fa-plus"></i> Nouvelle categorie</a>
+    </div>
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Libelle</th>
-                <th>Description</th>
                 <th>Slug</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
+                <th>Description</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -20,28 +27,17 @@
             <tr>
                 <td><a href="{{ path('admin_category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
                 <td>{{ category.libelle }}</td>
-                <td>{{ category.description }}</td>
                 <td>{{ category.slug }}</td>
-                <td>{% if category.createdAt %}{{ category.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if category.updatedAt %}{{ category.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ category.description }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_category_show', { 'id': category.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_category_edit', { 'id': category.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a class="btn btn-secondary" href="{{ path('admin_category_show', { 'id': category.id }) }}">show</a>
+                    <a class="btn btn-danger" href="{{ path('admin_category_edit', { 'id': category.id }) }}">edit</a>
+                       
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_category_new') }}">Create a new category</a>
-        </li>
-    </ul>
+   
 {% endblock %}
