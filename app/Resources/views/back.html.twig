@@ -53,8 +53,41 @@
 </nav>
 
 
+<div class="container-fluid mt-4">
+<div class="row">
+  <div class="col-6">
+    {% block breadcrumb %}{% endblock %}
+  </div>
+  <div class="col-6" align="right">
+    <select name="accesRapide" id="">
+      <option value="">nouveau article</option>
+      <option value="">nouvelle categorie</option>
+    </select>
+  </div>
+</div>
 
-        {% block body %}{% endblock %}
+  <div class="row">
+    <div class="col-3">
+      <ul class="list-group">
+        <li class="list-group-item"><a href="">Tableau de bord</a></li>
+        <li class="list-group-item">Categorie</li>
+        <li class="list-group-item"><a href="">Liste des categories</a></li>
+        <li class="list-group-item"><a href="">Nouvelle categorie</a></li>
+        <li class="list-group-item">Article</li>
+        <li class="list-group-item"><a href="">Liste des articles</a></li>
+        <li class="list-group-item"><a href="">Nouveau article</a></li>
+        <li class="list-group-item">Administration</li>
+        <li class="list-group-item"><a href="">Statistique</a></li>
+        <li class="list-group-item"><a href="">Parametrage</a></li>
+        
+      </ul>
+    </div>
+    <div class="col-9">
+      {% block body %}{% endblock %}
+    </div>
+  </div>
+</div>
+       
         {% block javascripts %}{% endblock %}
     </body>
 </html>
