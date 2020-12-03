@@ -24,16 +24,10 @@
         </div>
 
         <input class="btn btn-danger" type="submit" value="Edit" />
+        <a class="btn btn-secondary" href="{{ path('admin_category_index') }}">Retour</a>
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_category_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    
+            
+       
 {% endblock %}
