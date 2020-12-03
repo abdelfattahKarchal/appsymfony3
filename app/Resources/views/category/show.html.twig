@@ -1,48 +1,29 @@
 {% extends 'back.html.twig' %}
 
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"> <a href="">Tableau de bord</a> </li>
+        <li class="breadcrumb-item"> <a href="{{ path('admin_category_index') }}">Liste des categories</a> </li>
+        <li class="breadcrumb-item active"> {{ category.libelle }}</li>
+    </ol>
+{% endblock %}
+
 {% block body %}
-    <h1>Category</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ category.libelle }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ category.description }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ category.slug }}</td>
-            </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{% if category.createdAt %}{{ category.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Updatedat</th>
-                <td>{% if category.updatedAt %}{{ category.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="card border-secondary mb-3">
+  <div class="card-header"> <h3>{{ category.libelle }}</h3> </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ category.slug }}</h5>
+    <p class="card-text"> {{ category.description }} </p>
+    <small>
+            Cree le : {% if category.createdAt %}{{ category.createdAt|date('Y-m-d H:i:s') }}{% endif %} <br>
+            Modifie le : {% if category.createdAt %}{{ category.createdAt|date('Y-m-d H:i:s') }}{% endif %}
+    </small>
+  </div>
+</div>
+    
+    <a class="btn btn-secondary" href="{{ path('admin_category_index') }}">Retour</a>
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_category_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('admin_category_edit', { 'id': category.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <a class="btn btn-warning" href="{{ path('admin_category_edit', { 'id': category.id }) }}">Editer</a>
+      
 {% endblock %}
