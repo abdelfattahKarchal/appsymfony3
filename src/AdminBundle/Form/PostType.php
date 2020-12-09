@@ -6,6 +6,7 @@ use DateTime;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,6 +31,9 @@ class PostType extends AbstractType
             'choice_label' => 'libelle',
             'expanded' => false,
             'multiple' => true
+        ))
+        ->add('image', FileType::class, array(
+            'label' => 'image png ou jpeg'
         ))
         ;
         //->add('categories');

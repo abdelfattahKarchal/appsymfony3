@@ -3,7 +3,7 @@
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Post
  *
@@ -61,6 +61,15 @@ class Post
      * @ORM\ManyToMany(targetEntity="AdminBundle\Entity\Category")
      */
     private $categories;
+
+    /**
+     * 
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="merci de mettre une image")
+     * @Assert\File(mimeTypes={"image/png", "image/jpeg"})
+     */
+    private $image;
+
     /**
      * Get id
      *
@@ -230,5 +239,29 @@ class Post
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Post
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
