@@ -3,6 +3,7 @@
 namespace AdminBundle\Form;
 
 use DateTime;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +24,14 @@ class PostType extends AbstractType
             'widget' => 'single_text',
             'format' => 'yyyy-MM-dd',
             'data' => new DateTime()
-        ));
+        ))
+        ->add('categories', EntityType::class,array(
+            'class' => 'AdminBundle\Entity\Category',
+            'choice_label' => 'libelle',
+            'expanded' => false,
+            'multiple' => true
+        ))
+        ;
         //->add('categories');
     }
     
