@@ -1,9 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends 'back.html.twig' %}
 
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"> <a href="">Tableau de bord</a> </li>
+        <li class=" breadcrumb-item active"> Liste des posts </li>
+    </ol>
+{% endblock %}
 {% block body %}
-    <h1>Posts list</h1>
-
-    <table>
+<h3>Liste des postes</h3>
+    <div class="pull-right">
+        <a class="btn btn-success" href="{{ path('admin_post_new') }}"> <i class="fa fa-plus"></i> Nouvel post</a>
+    </div>
+    <table  class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -39,9 +47,4 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_post_new') }}">Create a new post</a>
-        </li>
-    </ul>
 {% endblock %}

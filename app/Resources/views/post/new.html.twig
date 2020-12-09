@@ -1,16 +1,52 @@
-{% extends 'base.html.twig' %}
+{% extends 'back.html.twig' %}
 
+
+{% block breadcrumb %}
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="">Tableau de bord</a>
+		</li>
+		<li class=" breadcrumb-item">
+			<a href="">Liste des postes</a>
+		</li>
+		<li class=" breadcrumb-item active">
+			Ajouter nouveau post</li>
+	</ol>
+{% endblock %}
 {% block body %}
-    <h1>Post creation</h1>
+	<h1>Nouveau post</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+	{{ form_start(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_post_index') }}">Back to the list</a>
-        </li>
-    </ul>
+	<div class="row">
+		<div class="col-8">
+
+			<div class="form-group">
+				{{ form_row(form.title, {'attr' : {'class' : 'form-control'}})}}
+			</div>
+			<div class="form-group">
+				{{ form_row(form.slug, {'attr' : {'class' : 'form-control'}})}}
+			</div>
+			<div class="form-group">
+				{{ form_row(form.description, {'attr' : {'class' : 'form-control'}})}}
+			</div>
+			<div class="form-group">
+				{{ form_row(form.body, {'attr' : {'class' : 'form-control'}})}}
+			</div>
+		</div>
+		<div class="col-4">
+            <div class="form-group">
+				{{ form_row(form.datepublish, {'attr' : {'class' : 'form-control'}})}}
+			</div>
+
+            <input class="btn btn-primary" type="submit" value="Enregistrer"/>
+	<a class="btn btn-secondary" href="{{ path('admin_post_index') }}">Retour</a>
+        </div>
+	</div>
+
+
+	
+	{{ form_end(form) }}
+
+
 {% endblock %}
