@@ -2,7 +2,9 @@
 
 namespace AdminBundle\Form;
 
+use DateTime;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +15,16 @@ class PostType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('description')->add('body')->add('slug')->add('datepublish')->add('categories');
+        $builder->add('title')
+        ->add('description')
+        ->add('body')
+        ->add('slug')
+        ->add('datepublish', DateType::class, array(
+            'widget' => 'single_text',
+            'format' => 'yyyy-MM-dd',
+            'data' => new DateTime()
+        ));
+        //->add('categories');
     }
     
     /**
