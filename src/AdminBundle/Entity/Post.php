@@ -63,9 +63,10 @@ class Post
     private $categories;
 
     /**
+     *
      * 
+     * @Assert\NotBlank(message="Merci de mettre une image !", groups={"new"})
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="merci de mettre une image")
      * @Assert\File(mimeTypes={"image/png", "image/jpeg"})
      */
     private $image;
