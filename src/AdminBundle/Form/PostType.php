@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Form;
 
+use AdminBundle\Entity\Post;
 use DateTime;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -33,7 +34,9 @@ class PostType extends AbstractType
             'multiple' => true
         ))
         ->add('image', FileType::class, array(
-            'label' => 'image png ou jpeg'
+            'required' => false,
+            'label' => 'image png ou jpeg',
+            'data_class' => null,
         ))
         ;
         //->add('categories');
@@ -45,7 +48,8 @@ class PostType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AdminBundle\Entity\Post'
+            'data_class' => 'AdminBundle\Entity\Post',
+            //'validation_groups' => array('registration'),
         ));
     }
 

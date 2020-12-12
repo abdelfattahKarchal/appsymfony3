@@ -1,50 +1,50 @@
 {% extends 'back.html.twig' %}
 
 {% block breadcrumb %}
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"> <a href="">Tableau de bord</a> </li>
-        <li class=" breadcrumb-item active"> Liste des posts </li>
-    </ol>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="">Tableau de bord</a>
+		</li>
+		<li class=" breadcrumb-item active">
+			Liste des posts
+		</li>
+	</ol>
 {% endblock %}
 {% block body %}
-<h3>Liste des postes</h3>
-    <div class="pull-right">
-        <a class="btn btn-success" href="{{ path('admin_post_new') }}"> <i class="fa fa-plus"></i> Nouvel post</a>
-    </div>
-    <table  class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Body</th>
-                <th>Slug</th>
-                <th>Datepublish</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for post in posts %}
-            <tr>
-                <td><a href="{{ path('admin_post_show', { 'id': post.id }) }}">{{ post.id }}</a></td>
-                <td> <img src=" {{ asset('uploads/posts/' ~ post.image) }} " width="50px"  alt=""> {{ post.title }}</td>
-                <td>{{ post.description }}</td>
-                <td>{{ post.body }}</td>
-                <td>{{ post.slug }}</td>
-                <td>{% if post.datepublish %}{{ post.datepublish|date('Y-m-d') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_post_show', { 'id': post.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_post_edit', { 'id': post.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<h3>Liste des postes</h3>
+	<div class="row">
+		<div class="col-3">
+			<div class="pull-left">
+				<a class="btn btn-success" href="{{ path('admin_post_new') }}">
+					<i class="fa fa-plus"></i>
+					Nouveau post</a>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row mt-3">
+		{% for post in posts %}
+
+
+			<div class="col-xs-12 col-sm-6 col-md-4">
+
+				<div class="card" style="width: 23rem;">
+					<img src="{{ asset('uploads/posts/' ~ post.image) }}" class="card-img-top" alt="">
+					<div class="card-body">
+						<h5 class="card-title">{{ post.title }}</h5>
+						<p class="card-text">{{  post.description | slice(0,80) }}...</p>
+						<a href="{{ path('admin_post_show', { 'id': post.id }) }}" class="btn btn-primary">Afficher</a>
+						<a href="{{ path('admin_post_edit', { 'id': post.id }) }}" class="btn btn-secondary">Editer</a>
+					</div>
+				</div>
+
+				
+			</div>
+
+
+		{% endfor %}
+	</div>
+
 
 {% endblock %}
