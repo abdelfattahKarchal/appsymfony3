@@ -59,10 +59,17 @@
     {% block breadcrumb %}{% endblock %}
   </div>
   <div class="col-6" align="right">
-    <select name="accesRapide" id="">
-      <option value="">nouveau article</option>
-      <option value="">nouvelle categorie</option>
+
+  {# verbatim : ici on dit a symfony que le code qui se trouve dans verbatim tu ne l interprete pas comme twig 
+    et comme ça il va interpreter le code {{ acces.libelle }} en vuejs
+  #}
+  {% verbatim %}
+    <select v-on:change="getAccesRapide" name="accesRapide" id="app" v-model="accesRapide">
+      <option v-for="acces in listAccesRapide" v-bind:value="acces.lien">{{ acces.libelle }}</option>
+      
     </select>
+  {% endverbatim %}
+    
   </div>
 </div>
 
@@ -84,11 +91,31 @@
     </div>
     <div class="col-10" style="background-color: #eee">
     {% include "alert.html.twig" %}
+
       {% block body %}{% endblock %}
     </div>
   </div>
 </div>
-       
+       <script src="{{ asset('js/vue.min.js') }}"></script>
+
+       <script>
+          var myApp = new Vue({
+            el: "#app",
+            data: {
+              accesRapide: "",
+              listAccesRapide : [
+                {libelle: "Acces rapide", lien: ""},
+                {libelle: "Nouveau article", lien: "/admin/post/new"},
+                {libelle: "Nouvelle categorie", lien: "/admin/category/new"},
+              ]
+            },
+            methods: {
+              getAccesRapide: function(){
+                window.location = this.accesRapide
+              }
+            }
+          });
+       </script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
