@@ -5,8 +5,11 @@ namespace AppBundle\Controller;
 use AdminBundle\Entity\Post;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class DefaultController extends Controller
 {
     /**
@@ -47,6 +50,35 @@ class DefaultController extends Controller
         $post = $em->getRepository('AdminBundle:Post')->find($id);
         return $this->render('default/show.html.twig', [
             'post' => $post
+        ]);
+    }
+
+    /**
+     * @Route("/contact", name="contact_show")
+     * @Method({"GET", "POST"})
+     */
+    public function contact(Request $request, \Swift_Mailer $mailer){
+        //creation de formulaire
+        $form = $this->createFormBuilder()
+                    ->add('from')
+                    ->add('subject')
+                    ->add('body', TextareaType::class)
+                    ->getForm();
+            
+          $form->handleRequest($request);          
+          
+         if ($form->isSubmitted()) {
+             $data = $form->getData();
+             //traitement d envoi de mail
+            $message = (new \Swift_Message($data['subject']))
+            ->setFrom($data['from'])
+            ->setTo('abdel@gmail.com')
+            ->setBody($data['body'], 'text\plain');
+
+            $mailer->send($message);
+         }           
+        return $this->render('default/contact.html.twig',[
+            'form' => $form->createView()
         ]);
     }
    
