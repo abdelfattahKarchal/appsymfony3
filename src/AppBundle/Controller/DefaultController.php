@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AdminBundle\Entity\Post;
+use AppBundle\Service\MathService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -10,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Response;
+
 class DefaultController extends Controller
 {
     /**
@@ -80,6 +83,14 @@ class DefaultController extends Controller
         return $this->render('default/contact.html.twig',[
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/operation", name="operation")
+     */
+    public function operation(MathService $service)
+    {
+        return new Response($service->addition(30,40));
     }
    
 }
